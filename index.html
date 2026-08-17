@@ -1,0 +1,2213 @@
+<style>
+	@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+	:root {
+		--bg: #0b0a08;
+		--bg-elev: #131110;
+		--ink: #f6f1e9;
+		--ink-dim: #a89f92;
+		--ink-faint: #6e675e;
+		--orange: #ff6a2c;
+		--orange-soft: #ffb37a;
+		--orange-deep: #c8451a;
+		--line: rgba(246, 241, 233, 0.1);
+		--glass: rgba(246, 241, 233, 0.045);
+		--glass-strong: rgba(246, 241, 233, 0.08);
+	}
+
+	.mn-root {
+		background: var(--bg);
+		color: var(--ink);
+		font-family: "Inter", sans-serif;
+		line-height: 1.5;
+		overflow-x: hidden;
+		position: relative;
+	}
+	.mn-root * {
+		box-sizing: border-box;
+	}
+	.mn-root h1,
+	.mn-root h2,
+	.mn-root h3,
+	.mn-root h4 {
+		font-family: "Space Grotesk", sans-serif;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		margin: 0;
+		color: var(--ink);
+	}
+	.mn-mono {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 12px;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--orange-soft);
+	}
+	.mn-section {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 96px 32px;
+		position: relative;
+	}
+	.mn-section-tight {
+		padding-top: 64px;
+		padding-bottom: 64px;
+	}
+	.mn-glass {
+		background: var(--glass);
+		border: 1px solid var(--line);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border-radius: 18px;
+	}
+	.mn-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 14px 26px;
+		border-radius: 100px;
+		font-family: "Inter", sans-serif;
+		font-weight: 600;
+		font-size: 15px;
+		cursor: pointer;
+		border: 1px solid transparent;
+		text-decoration: none;
+		transition:
+			transform 0.18s ease,
+			box-shadow 0.18s ease,
+			background 0.18s ease;
+		white-space: nowrap;
+	}
+	.mn-btn-primary {
+		background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+		color: #0b0a08;
+		box-shadow: 0 8px 24px -8px rgba(255, 106, 44, 0.55);
+	}
+	.mn-btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 30px -8px rgba(255, 106, 44, 0.7);
+	}
+	.mn-btn-ghost {
+		background: var(--glass);
+		color: var(--ink);
+		border: 1px solid var(--line);
+	}
+	.mn-btn-ghost:hover {
+		background: var(--glass-strong);
+	}
+
+	/* NAV */
+	.mn-nav {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 20px 32px;
+		background: rgba(11, 10, 8, 0.7);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border-bottom: 1px solid var(--line);
+	}
+	.mn-logo {
+		font-family: "Space Grotesk", sans-serif;
+		font-weight: 700;
+		font-size: 20px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.mn-logo-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--orange);
+		box-shadow: 0 0 12px var(--orange);
+	}
+	.mn-nav-links {
+		display: flex;
+		gap: 32px;
+		align-items: center;
+	}
+	.mn-nav-links a {
+		color: var(--ink-dim);
+		text-decoration: none;
+		font-size: 14px;
+		transition: color 0.15s;
+	}
+	.mn-nav-links a:hover {
+		color: var(--ink);
+	}
+	.mn-nav-mobile {
+		display: none;
+	}
+
+	/* HERO */
+	.mn-hero-outer {
+		position: relative;
+		overflow: hidden;
+		width: 100%;
+	}
+	.mn-hero-bg {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		transform: scale(1.2);
+		margin: -10%;
+	}
+	.mn-hero-bg video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 75% 40%;
+		filter: saturate(1.05) contrast(1.05) brightness(1.1);
+		opacity: 0.85;
+	}
+	.mn-hero-bg::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(
+				100deg,
+				var(--bg) 0%,
+				rgba(11, 10, 8, 0.75) 28%,
+				rgba(11, 10, 8, 0.15) 55%,
+				rgba(11, 10, 8, 0.35) 100%
+			),
+			linear-gradient(0deg, var(--bg) 0%, transparent 30%);
+	}
+	.mn-hero {
+		position: relative;
+		z-index: 1;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 120px 32px 80px;
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: 48px;
+		align-items: center;
+	}
+	.mn-hero-glow {
+		position: absolute;
+		top: -200px;
+		right: -200px;
+		width: 700px;
+		height: 700px;
+		background: radial-gradient(
+			circle,
+			rgba(255, 106, 44, 0.35),
+			transparent 70%
+		);
+		filter: blur(40px);
+		pointer-events: none;
+		z-index: 0;
+	}
+	.mn-hero-content {
+		position: relative;
+		z-index: 1;
+	}
+	.mn-cursor-glow {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 560px;
+		height: 560px;
+		margin: -280px 0 0 -280px;
+		background: radial-gradient(
+			circle,
+			rgba(255, 106, 44, 0.16),
+			transparent 72%
+		);
+		filter: blur(30px);
+		pointer-events: none;
+		z-index: 1;
+		opacity: 0;
+		transform: translate(var(--mn-cx, 50vw), var(--mn-cy, 50vh));
+		transition:
+			transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+			opacity 0.6s ease;
+	}
+	.mn-cursor-glow.mn-active {
+		opacity: 1;
+	}
+	.mn-hero h1 {
+		font-size: clamp(40px, 5.4vw, 72px);
+		line-height: 1.02;
+		margin: 20px 0 24px;
+	}
+	.mn-hero h1 em {
+		font-style: normal;
+		background: linear-gradient(120deg, var(--orange-soft), var(--orange));
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+	.mn-hero p {
+		color: var(--ink-dim);
+		font-size: 18px;
+		max-width: 480px;
+		margin-bottom: 36px;
+	}
+	.mn-hero-ctas {
+		display: flex;
+		gap: 14px;
+		flex-wrap: wrap;
+		margin-bottom: 40px;
+	}
+	.mn-trust-row {
+		display: flex;
+		align-items: center;
+		gap: 22px;
+		flex-wrap: wrap;
+	}
+	.mn-trust-row span {
+		color: var(--ink-faint);
+		font-size: 13px;
+	}
+	.mn-wordmark {
+		font-family: "Space Grotesk", sans-serif;
+		font-weight: 600;
+		font-size: 15px;
+		color: var(--ink-dim);
+		opacity: 0.8;
+	}
+
+	/* HERO VISUAL — live transcript -> action items */
+	.mn-hero-visual {
+		position: relative;
+		z-index: 1;
+	}
+	.mn-panel {
+		padding: 22px;
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		min-height: 360px;
+	}
+	.mn-panel-head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-bottom: 12px;
+		border-bottom: 1px solid var(--line);
+	}
+	.mn-dots {
+		display: flex;
+		gap: 6px;
+	}
+	.mn-dots span {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--ink-faint);
+	}
+	.mn-transcript {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 13px;
+		color: var(--ink-dim);
+		min-height: 110px;
+		line-height: 1.7;
+	}
+	.mn-transcript .mn-cursor {
+		display: inline-block;
+		width: 7px;
+		height: 14px;
+		background: var(--orange);
+		animation: mnBlink 1s steps(1) infinite;
+		vertical-align: middle;
+		margin-left: 2px;
+	}
+	@keyframes mnBlink {
+		50% {
+			opacity: 0;
+		}
+	}
+	.mn-task-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.mn-task {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 12px 14px;
+		background: var(--glass-strong);
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		font-size: 13px;
+		opacity: 0;
+		transform: translateY(8px);
+		transition:
+			opacity 0.5s ease,
+			transform 0.5s ease;
+	}
+	.mn-task.mn-show {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	.mn-task-check {
+		width: 16px;
+		height: 16px;
+		border-radius: 5px;
+		border: 1.5px solid var(--orange);
+		flex-shrink: 0;
+	}
+	.mn-task b {
+		color: var(--ink);
+		font-weight: 600;
+	}
+	.mn-task-who {
+		margin-left: auto;
+		color: var(--orange-soft);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 11px;
+	}
+
+	/* SOCIAL PROOF STRIP */
+	.mn-proof {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 40px;
+		align-items: center;
+		justify-content: space-between;
+		padding: 28px 32px;
+		max-width: 1180px;
+		margin: 0 auto;
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
+	}
+	.mn-proof-item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	.mn-proof-num {
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 28px;
+		font-weight: 700;
+		color: var(--ink);
+	}
+	.mn-proof-label {
+		color: var(--ink-faint);
+		font-size: 13px;
+		max-width: 140px;
+	}
+	.mn-stars {
+		color: var(--orange);
+		letter-spacing: 2px;
+	}
+
+	/* EYEBROW */
+	.mn-eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-bottom: 18px;
+	}
+	.mn-eyebrow-line {
+		width: 28px;
+		height: 1px;
+		background: var(--orange);
+	}
+
+	/* PROBLEM */
+	.mn-problem-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		margin-top: 40px;
+	}
+	.mn-problem-card {
+		padding: 28px;
+	}
+	.mn-problem-card .mn-num {
+		font-family: "JetBrains Mono", monospace;
+		color: var(--ink-faint);
+		font-size: 13px;
+		margin-bottom: 16px;
+		display: block;
+	}
+	.mn-problem-card p {
+		color: var(--ink-dim);
+		font-size: 15px;
+		margin-top: 10px;
+	}
+	.mn-problem-card h4 {
+		font-size: 19px;
+		font-weight: 500;
+	}
+
+	/* HOW IT WORKS */
+	.mn-how-grid {
+		display: grid;
+		grid-template-columns: 1fr 0.8fr;
+		gap: 48px;
+		align-items: center;
+		margin-top: 40px;
+	}
+	.mn-how-img {
+		position: relative;
+		min-height: 420px;
+		overflow: hidden;
+	}
+	.mn-how-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		inset: 0;
+	}
+	.mn-how-img::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			160deg,
+			rgba(11, 10, 8, 0.05),
+			rgba(11, 10, 8, 0.55)
+		);
+	}
+	.mn-steps {
+		position: relative;
+	}
+	.mn-steps-line {
+		position: absolute;
+		left: 23px;
+		top: 12px;
+		bottom: 12px;
+		width: 1px;
+		background: linear-gradient(var(--orange), transparent 90%);
+		opacity: 0.5;
+	}
+	.mn-step {
+		display: grid;
+		grid-template-columns: 48px 1fr;
+		gap: 24px;
+		padding-bottom: 44px;
+		position: relative;
+	}
+	.mn-step:last-child {
+		padding-bottom: 0;
+	}
+	.mn-step-index {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 14px;
+		background: var(--bg);
+		border: 1px solid var(--orange);
+		color: var(--orange-soft);
+		z-index: 1;
+		position: relative;
+	}
+	.mn-step-index::before {
+		content: "";
+		position: absolute;
+		inset: -5px;
+		border-radius: 50%;
+		z-index: -1;
+		background: conic-gradient(
+			from 0deg,
+			transparent 0%,
+			var(--orange) 18%,
+			transparent 38%
+		);
+		animation: mnStepSpin 3.5s linear infinite;
+		opacity: 0.75;
+	}
+	@keyframes mnStepSpin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	.mn-step.mn-reveal .mn-step-index {
+		transform: scale(0.4);
+		opacity: 0;
+		transition:
+			transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+			opacity 0.5s ease;
+	}
+	.mn-step.mn-reveal.mn-in .mn-step-index {
+		transform: scale(1);
+		opacity: 1;
+	}
+	.mn-step h4 {
+		font-size: 20px;
+		margin-bottom: 8px;
+	}
+	.mn-step p {
+		color: var(--ink-dim);
+		font-size: 15px;
+		max-width: 520px;
+	}
+
+	/* FEATURES */
+	.mn-feature-hero {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0;
+		overflow: hidden;
+		margin-top: 40px;
+	}
+	.mn-feature-hero-text {
+		padding: 44px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.mn-feature-hero-text h3 {
+		font-size: 28px;
+		margin-bottom: 14px;
+	}
+	.mn-feature-hero-text p {
+		color: var(--ink-dim);
+		font-size: 15px;
+	}
+	.mn-feature-hero-img {
+		position: relative;
+		min-height: 320px;
+		overflow: hidden;
+	}
+	.mn-feature-hero-img img,
+	.mn-feature-hero-img video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		inset: 0;
+	}
+	.mn-feature-hero-img::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background: linear-gradient(
+			180deg,
+			rgba(11, 10, 8, 0.02) 45%,
+			rgba(11, 10, 8, 0.8) 100%
+		);
+	}
+	.mn-wave {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		align-items: flex-end;
+		gap: 5px;
+		height: 60%;
+		padding: 0 40px 40px;
+	}
+	.mn-wave span {
+		flex: 1;
+		border-radius: 4px;
+		background: linear-gradient(180deg, var(--orange-soft), var(--orange-deep));
+		opacity: 0.85;
+	}
+	.mn-ask-bubble {
+		position: absolute;
+		bottom: 36px;
+		left: 36px;
+		right: 36px;
+		z-index: 2;
+		padding: 14px 18px;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 13px;
+		color: var(--ink);
+		background: rgba(11, 10, 8, 0.7);
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		backdrop-filter: blur(6px);
+	}
+	.mn-ask-bubble b {
+		color: var(--orange-soft);
+	}
+
+	.mn-feature-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		margin-top: 20px;
+	}
+	.mn-feature-card {
+		padding: 26px;
+	}
+	.mn-feature-card .mn-feature-icon {
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		background: var(--glass-strong);
+		border: 1px solid var(--line);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--orange);
+		margin-bottom: 18px;
+		font-size: 18px;
+	}
+	.mn-feature-card h4 {
+		font-size: 17px;
+		margin-bottom: 8px;
+		font-weight: 500;
+	}
+	.mn-feature-card p {
+		color: var(--ink-dim);
+		font-size: 14px;
+	}
+
+	/* INTEGRATIONS */
+	.mn-integrations {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 14px;
+		margin-top: 36px;
+	}
+	.mn-integration-chip {
+		padding: 12px 20px;
+		font-family: "Space Grotesk", sans-serif;
+		font-weight: 600;
+		font-size: 14px;
+		color: var(--ink-dim);
+	}
+
+	/* PRIVACY */
+	.mn-privacy {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 40px;
+		align-items: center;
+		padding: 52px;
+		margin-top: 0;
+	}
+	.mn-privacy.mn-about {
+		padding: 0;
+		overflow: hidden;
+		align-items: stretch;
+	}
+	.mn-about-img {
+		position: relative;
+		min-height: 340px;
+	}
+	.mn-about-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		inset: 0;
+	}
+	.mn-about-text {
+		padding: 44px;
+	}
+	.mn-privacy-points {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		margin-top: 24px;
+	}
+	.mn-privacy-point {
+		display: flex;
+		gap: 12px;
+		align-items: flex-start;
+	}
+	.mn-privacy-point .mn-check {
+		color: var(--orange);
+		font-family: "JetBrains Mono", monospace;
+		flex-shrink: 0;
+	}
+	.mn-privacy-point p {
+		color: var(--ink-dim);
+		font-size: 14px;
+		margin: 0;
+	}
+	.mn-privacy-visual {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 12px;
+		color: var(--ink-faint);
+		background: rgba(0, 0, 0, 0.35);
+		border: 1px solid var(--line);
+		border-radius: 14px;
+		padding: 22px;
+	}
+	.mn-privacy-visual .mn-line-ok {
+		color: var(--orange-soft);
+	}
+
+	/* TESTIMONIALS */
+	.mn-testi-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+		margin-top: 40px;
+	}
+	.mn-testi-card {
+		padding: 26px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.mn-testi-card p {
+		color: var(--ink);
+		font-size: 15px;
+		line-height: 1.6;
+	}
+	.mn-testi-person {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-top: auto;
+	}
+	.mn-testi-avatar {
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 1px solid var(--line);
+		flex-shrink: 0;
+	}
+	.mn-testi-name {
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--ink);
+	}
+	.mn-testi-role {
+		font-size: 12px;
+		color: var(--ink-faint);
+	}
+
+	/* PRICING */
+	.mn-pricing-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+		margin-top: 44px;
+	}
+	.mn-price-card {
+		padding: 36px;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+	.mn-price-card .mn-btn {
+		margin-top: auto;
+	}
+	.mn-price-card.mn-highlight {
+		border: 1px solid var(--orange);
+		background: linear-gradient(
+			160deg,
+			rgba(255, 106, 44, 0.1),
+			rgba(246, 241, 233, 0.03)
+		);
+	}
+	.mn-price-badge {
+		position: absolute;
+		top: -12px;
+		right: 32px;
+		background: var(--orange);
+		color: #0b0a08;
+		font-size: 11px;
+		font-weight: 700;
+		padding: 5px 12px;
+		border-radius: 100px;
+		font-family: "JetBrains Mono", monospace;
+		letter-spacing: 0.05em;
+	}
+	.mn-price-card h4 {
+		font-size: 20px;
+		margin-bottom: 6px;
+	}
+	.mn-price-card .mn-price-sub {
+		color: var(--ink-faint);
+		font-size: 13px;
+		margin-bottom: 20px;
+	}
+	.mn-price-amount {
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 40px;
+		font-weight: 700;
+		margin-bottom: 4px;
+	}
+	.mn-price-amount span {
+		font-size: 14px;
+		color: var(--ink-faint);
+		font-weight: 400;
+		font-family: "Inter", sans-serif;
+	}
+	.mn-price-list {
+		list-style: none;
+		padding: 0;
+		margin: 24px 0 28px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.mn-price-list li {
+		color: var(--ink-dim);
+		font-size: 14px;
+		display: flex;
+		gap: 10px;
+		align-items: flex-start;
+	}
+	.mn-price-list li::before {
+		content: "—";
+		color: var(--orange);
+		flex-shrink: 0;
+	}
+	.mn-price-note {
+		text-align: center;
+		color: var(--ink-faint);
+		font-size: 13px;
+		margin-top: 20px;
+	}
+
+	/* FAQ */
+	.mn-faq {
+		max-width: 760px;
+		margin: 44px auto 0;
+	}
+	.mn-faq-item {
+		border-bottom: 1px solid var(--line);
+	}
+	.mn-faq-q {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 16px;
+		padding: 22px 4px;
+		cursor: pointer;
+		font-family: "Space Grotesk", sans-serif;
+		font-size: 17px;
+		font-weight: 500;
+		color: var(--ink);
+	}
+	.mn-faq-q:hover {
+		color: var(--orange-soft);
+	}
+	.mn-faq-plus {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		border: 1px solid var(--line);
+		color: var(--orange-soft);
+		font-size: 16px;
+		font-family: "JetBrains Mono", monospace;
+		transition:
+			transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+			background 0.25s ease,
+			border-color 0.25s ease,
+			color 0.25s ease;
+	}
+	.mn-faq-q:hover .mn-faq-plus {
+		border-color: var(--orange-soft);
+		background: var(--glass-strong);
+		transform: scale(1.1);
+	}
+	.mn-faq-item.mn-open .mn-faq-plus {
+		transform: rotate(135deg);
+		background: var(--orange);
+		color: #0b0a08;
+		border-color: var(--orange);
+	}
+	.mn-faq-a {
+		display: grid;
+		grid-template-rows: 0fr;
+		transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.mn-faq-a-inner {
+		overflow: hidden;
+		min-height: 0;
+		color: var(--ink-dim);
+		font-size: 14px;
+		line-height: 1.7;
+	}
+	.mn-faq-a-inner p {
+		padding-bottom: 22px;
+		margin: 0;
+	}
+	.mn-faq-item.mn-open .mn-faq-a {
+		grid-template-rows: 1fr;
+	}
+
+	/* FINAL CTA */
+	.mn-final {
+		text-align: center;
+		padding: 80px 40px;
+		margin: 0 32px;
+		background:
+			radial-gradient(
+				circle at 50% 0%,
+				rgba(255, 106, 44, 0.18),
+				transparent 65%
+			),
+			var(--glass);
+	}
+	.mn-final h2 {
+		font-size: clamp(32px, 4.4vw, 52px);
+		margin-bottom: 18px;
+	}
+	.mn-final p {
+		color: var(--ink-dim);
+		margin-bottom: 32px;
+	}
+	.mn-final-ctas {
+		display: flex;
+		gap: 14px;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	/* FOOTER */
+	.mn-footer {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 56px 32px 40px;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 32px;
+		border-top: 1px solid var(--line);
+	}
+	.mn-footer-links {
+		display: flex;
+		gap: 48px;
+		flex-wrap: wrap;
+	}
+	.mn-footer-col {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.mn-footer-col span.mn-mono {
+		color: var(--ink-faint);
+		margin-bottom: 4px;
+	}
+	.mn-footer-col a {
+		color: var(--ink-dim);
+		text-decoration: none;
+		font-size: 14px;
+	}
+	.mn-footer-col a:hover {
+		color: var(--ink);
+	}
+	.mn-footer-bottom {
+		color: var(--ink-faint);
+		font-size: 13px;
+	}
+	.mn-social {
+		width: 36px;
+		height: 36px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--ink-dim);
+		text-decoration: none;
+		transition:
+			color 0.15s ease,
+			border-color 0.15s ease;
+	}
+	.mn-social:hover {
+		color: var(--orange-soft);
+		border-color: var(--orange-soft);
+	}
+	.mn-social svg {
+		width: 16px;
+		height: 16px;
+		fill: currentColor;
+	}
+
+	/* MODAL */
+	.mn-modal-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		background: rgba(8, 7, 6, 0.7);
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.25s ease;
+	}
+	.mn-modal-overlay.mn-modal-open {
+		opacity: 1;
+		pointer-events: auto;
+	}
+	.mn-modal {
+		background: var(--bg-elev);
+		border: 1px solid var(--line);
+		border-radius: 20px;
+		max-width: 640px;
+		width: 100%;
+		max-height: 80vh;
+		display: flex;
+		flex-direction: column;
+		box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+		transform: translateY(16px) scale(0.98);
+		transition: transform 0.25s ease;
+	}
+	.mn-modal-overlay.mn-modal-open .mn-modal {
+		transform: translateY(0) scale(1);
+	}
+	.mn-modal-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 24px 28px;
+		border-bottom: 1px solid var(--line);
+		flex-shrink: 0;
+	}
+	.mn-modal-head h3 {
+		font-size: 20px;
+	}
+	.mn-modal-close {
+		width: 32px;
+		height: 32px;
+		border-radius: 10px;
+		background: var(--glass-strong);
+		border: 1px solid var(--line);
+		color: var(--ink-dim);
+		font-size: 18px;
+		line-height: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		flex-shrink: 0;
+		transition:
+			color 0.15s ease,
+			border-color 0.15s ease;
+	}
+	.mn-modal-close:hover {
+		color: var(--orange-soft);
+		border-color: var(--orange-soft);
+	}
+	.mn-modal-body {
+		padding: 8px 28px 28px;
+		overflow-y: auto;
+	}
+	.mn-modal-body p {
+		color: var(--ink-dim);
+		font-size: 14px;
+		line-height: 1.7;
+		margin: 0 0 14px;
+	}
+	.mn-modal-body h4 {
+		font-size: 15px;
+		color: var(--ink);
+		margin: 20px 0 8px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.mn-modal-body h4::before {
+		content: "";
+		width: 14px;
+		height: 1px;
+		background: var(--orange);
+	}
+	.mn-modal-body ul {
+		margin: 0 0 14px;
+		padding-left: 18px;
+		color: var(--ink-dim);
+		font-size: 14px;
+		line-height: 1.7;
+	}
+	.mn-modal-updated {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 11px;
+		color: var(--orange-soft);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 16px;
+		display: block;
+	}
+
+	/* SCROLL REVEAL */
+	.mn-reveal {
+		opacity: 0;
+		transform: translateY(36px) scale(0.98);
+		filter: blur(6px);
+		transition:
+			opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+			transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+			filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+	.mn-reveal.mn-in {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		filter: blur(0);
+	}
+
+	@media (max-width: 860px) {
+		.mn-nav-links {
+			display: none;
+		}
+		.mn-hero {
+			grid-template-columns: 1fr;
+			padding-top: 80px;
+		}
+		.mn-problem-grid,
+		.mn-feature-grid,
+		.mn-testi-grid {
+			grid-template-columns: 1fr;
+		}
+		.mn-pricing-grid {
+			grid-template-columns: 1fr;
+		}
+		.mn-feature-hero {
+			grid-template-columns: 1fr;
+		}
+		.mn-how-grid {
+			grid-template-columns: 1fr;
+		}
+		.mn-how-img {
+			min-height: 240px;
+			order: -1;
+		}
+		.mn-feature-hero-img {
+			min-height: 220px;
+		}
+		.mn-privacy {
+			grid-template-columns: 1fr;
+			padding: 32px;
+		}
+
+		.mn-proof {
+			justify-content: flex-start;
+			gap: 28px;
+		}
+	}
+</style>
+
+<div class="mn-root">
+	<div class="mn-cursor-glow" id="mnCursorGlow"></div>
+
+	<!-- NAV -->
+	<nav class="mn-nav">
+		<div class="mn-logo">
+			<span class="mn-logo-dot"></span>Minutes<span
+				style="color: var(--orange-soft)"
+				>.ai</span
+			>
+		</div>
+		<div class="mn-nav-links">
+			<a href="#features">Функції</a>
+			<a href="#pricing">Тарифи</a>
+			<a href="#faq">Питання</a>
+		</div>
+		<a
+			href="#cta"
+			class="mn-btn mn-btn-primary"
+			style="padding: 10px 20px; font-size: 14px"
+			>Спробувати безкоштовно</a
+		>
+	</nav>
+
+	<!-- HERO -->
+	<section class="mn-hero-outer">
+		<div class="mn-hero-bg">
+			<video autoplay muted loop playsinline>
+				<source
+					src="https://res.cloudinary.com/fc0ikiqk/video/upload/Camera_dolly-in_with_screen_glow_202608101042.mp4"
+					type="video/mp4" />
+			</video>
+		</div>
+		<div class="mn-hero">
+			<div class="mn-hero-glow"></div>
+			<div class="mn-hero-content">
+				<div class="mn-eyebrow">
+					<span class="mn-eyebrow-line"></span
+					><span class="mn-mono">AI meeting assistant</span>
+				</div>
+				<h1>Твоя команда більше <em>не забуде</em>, про що домовились</h1>
+				<p>
+					Minutes AI слухає ваші зустрічі, готує структуроване summary та
+					ставить задачі команді — поки ви просто розмовляєте.
+				</p>
+				<div class="mn-hero-ctas">
+					<a href="#cta" class="mn-btn mn-btn-primary">Почати безкоштовно →</a>
+					<a href="#how" class="mn-btn mn-btn-ghost">Як це працює</a>
+				</div>
+				<div class="mn-trust-row">
+					<span>Працює з</span>
+					<span class="mn-wordmark">Zoom</span>
+					<span class="mn-wordmark">Google Meet</span>
+					<span class="mn-wordmark">MS Teams</span>
+				</div>
+			</div>
+
+			<div class="mn-hero-visual">
+				<div class="mn-glass mn-panel">
+					<div class="mn-panel-head">
+						<div class="mn-dots"><span></span><span></span><span></span></div>
+						<span class="mn-mono" style="color: var(--ink-faint)"
+							>Recording · 14:02</span
+						>
+					</div>
+					<div class="mn-transcript" id="mnTranscript"></div>
+					<div class="mn-task-stack" id="mnTaskStack">
+						<div class="mn-task">
+							<span class="mn-task-check"></span
+							><span>Оновити <b>дизайн лендінгу</b> до п'ятниці</span
+							><span class="mn-task-who">@ілона</span>
+						</div>
+						<div class="mn-task">
+							<span class="mn-task-check"></span
+							><span>Надіслати <b>бриф клієнту</b></span
+							><span class="mn-task-who">@макс</span>
+						</div>
+						<div class="mn-task">
+							<span class="mn-task-check"></span
+							><span>Погодити <b>бюджет на Q3</b></span
+							><span class="mn-task-who">@олена</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- SOCIAL PROOF -->
+	<div class="mn-proof mn-reveal">
+		<div class="mn-proof-item">
+			<div class="mn-stars">★★★★★</div>
+			<div class="mn-proof-label">4.9 з 5 на основі 1200+ відгуків</div>
+		</div>
+		<div class="mn-proof-item">
+			<div class="mn-proof-num">10k+</div>
+			<div class="mn-proof-label">зустрічей оброблено щомісяця</div>
+		</div>
+		<div class="mn-proof-item">
+			<div class="mn-proof-num">3 год</div>
+			<div class="mn-proof-label">економії на команду щотижня</div>
+		</div>
+		<div class="mn-proof-item">
+			<div class="mn-proof-num">30 сек</div>
+			<div class="mn-proof-label">до готового summary після дзвінка</div>
+		</div>
+	</div>
+
+	<!-- PROBLEM -->
+	<section class="mn-section">
+		<div class="mn-reveal">
+			<div class="mn-eyebrow">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Знайома ситуація?</span>
+			</div>
+			<h2 style="font-size: clamp(28px, 3.6vw, 40px); max-width: 640px">
+				Зустріч закінчилась — і половина команди вже забула, про що домовились
+			</h2>
+		</div>
+		<div class="mn-problem-grid">
+			<div class="mn-glass mn-problem-card mn-reveal">
+				<span class="mn-num">01</span>
+				<h4>Ніхто не пам'ятає, хто за що відповідає</h4>
+				<p>Задачі губляться між усною домовленістю та реальним виконанням.</p>
+			</div>
+			<div class="mn-glass mn-problem-card mn-reveal">
+				<span class="mn-num">02</span>
+				<h4>Хтось весь час друкує замість того, щоб слухати</h4>
+				<p>Ручний конспект відволікає від самої розмови й важливих деталей.</p>
+			</div>
+			<div class="mn-glass mn-problem-card mn-reveal">
+				<span class="mn-num">03</span>
+				<h4>Домовленість губиться між Slack і поштою</h4>
+				<p>
+					Інформація розкидана по чатах — і ніхто не знає, де шукати правду.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- HOW IT WORKS -->
+	<section class="mn-section mn-section-tight" id="how">
+		<div class="mn-reveal">
+			<div class="mn-eyebrow">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Як це працює</span>
+			</div>
+			<h2 style="font-size: clamp(28px, 3.6vw, 40px)">
+				Три кроки — і жодного ручного конспекту
+			</h2>
+		</div>
+		<div class="mn-how-grid">
+			<div class="mn-steps">
+				<div class="mn-steps-line"></div>
+				<div class="mn-step mn-reveal">
+					<div class="mn-step-index">01</div>
+					<div>
+						<h4>Підключи Minutes AI</h4>
+						<p>
+							До Zoom, Google Meet або MS Teams — один клік, без встановлення
+							нічого зайвого.
+						</p>
+					</div>
+				</div>
+				<div class="mn-step mn-reveal">
+					<div class="mn-step-index">02</div>
+					<div>
+						<h4>Проведи зустріч як завжди</h4>
+						<p>
+							Minutes AI слухає у фоні. Ти можеш повністю зосередитись на
+							розмові.
+						</p>
+					</div>
+				</div>
+				<div class="mn-step mn-reveal">
+					<div class="mn-step-index">03</div>
+					<div>
+						<h4>Отримай summary й задачі за 30 секунд</h4>
+						<p>
+							Структуроване резюме та action items з дедлайнами летять прямо в
+							Slack.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="mn-glass mn-how-img mn-reveal">
+				<img
+					src="https://res.cloudinary.com/fc0ikiqk/image/upload/v1786348085/team_1.jpg"
+					alt="Команда обговорює деталі проєкту" />
+			</div>
+		</div>
+	</section>
+
+	<!-- FEATURES -->
+	<section class="mn-section" id="features">
+		<div class="mn-reveal">
+			<div class="mn-eyebrow">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Функції</span>
+			</div>
+			<h2 style="font-size: clamp(28px, 3.6vw, 40px); max-width: 640px">
+				Все, що потрібно команді, яка живе в зустрічах
+			</h2>
+		</div>
+
+		<div class="mn-glass mn-feature-hero mn-reveal">
+			<div class="mn-feature-hero-text">
+				<span class="mn-mono" style="margin-bottom: 14px; display: block"
+					>Головна фіча</span
+				>
+				<h3>Запитай будь-яку минулу зустріч своїми словами</h3>
+				<p>
+					«Що ми казали про бюджет у березні?» — Ask AI шукає відповідь по всій
+					історії зустрічей команди й дає точну цитату з таймкодом.
+				</p>
+			</div>
+			<div class="mn-feature-hero-img">
+				<video autoplay muted loop playsinline>
+					<source
+						src="https://res.cloudinary.com/fc0ikiqk/video/upload/Camera_dolly-in_with_screen_glow_202608101042.mp4"
+						type="video/mp4" />
+				</video>
+				<div class="mn-ask-bubble">
+					Ask AI: <b>«Що ми казали про бюджет у березні?»</b><br />→ "Погодили
+					ліміт $18k, обговорення о 14:32"
+				</div>
+			</div>
+		</div>
+
+		<div class="mn-feature-grid">
+			<div class="mn-glass mn-feature-card mn-reveal">
+				<div class="mn-feature-icon">◐</div>
+				<h4>Live-транскрипція</h4>
+				<p>Точний текст розмови в реальному часі з розпізнаванням спікерів.</p>
+			</div>
+			<div class="mn-glass mn-feature-card mn-reveal">
+				<div class="mn-feature-icon">▤</div>
+				<h4>Структуроване summary</h4>
+				<p>Не «простирадло» тексту — чіткі рішення, теми й наступні кроки.</p>
+			</div>
+			<div class="mn-glass mn-feature-card mn-reveal">
+				<div class="mn-feature-icon">✓</div>
+				<h4>Action items з дедлайнами</h4>
+				<p>AI сам виділяє задачу, відповідального і термін прямо з розмови.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- INTEGRATIONS -->
+	<section class="mn-section mn-section-tight">
+		<div class="mn-reveal">
+			<div class="mn-eyebrow">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Інтеграції</span>
+			</div>
+			<h2 style="font-size: clamp(24px, 3vw, 32px)">
+				Працює з інструментами, якими команда вже користується
+			</h2>
+		</div>
+		<div class="mn-integrations mn-reveal">
+			<div class="mn-glass mn-integration-chip">Slack</div>
+			<div class="mn-glass mn-integration-chip">HubSpot</div>
+			<div class="mn-glass mn-integration-chip">Salesforce</div>
+			<div class="mn-glass mn-integration-chip">Notion</div>
+			<div class="mn-glass mn-integration-chip">Zapier</div>
+			<div class="mn-glass mn-integration-chip">Jira</div>
+		</div>
+	</section>
+
+	<!-- PRIVACY -->
+	<section class="mn-section">
+		<div class="mn-glass mn-privacy mn-reveal">
+			<div>
+				<div class="mn-eyebrow">
+					<span class="mn-eyebrow-line"></span
+					><span class="mn-mono">Приватність</span>
+				</div>
+				<h3 style="font-size: 28px">
+					Запис без бота-учасника, якщо він вам заважає
+				</h3>
+				<div class="mn-privacy-points">
+					<div class="mn-privacy-point">
+						<span class="mn-check">→</span>
+						<p>Режим запису без видимого бота в списку учасників</p>
+					</div>
+					<div class="mn-privacy-point">
+						<span class="mn-check">→</span>
+						<p>
+							Дані зустрічей шифруються та не використовуються для тренування
+							моделей
+						</p>
+					</div>
+					<div class="mn-privacy-point">
+						<span class="mn-check">→</span>
+						<p>Гнучкі права доступу — сам обираєш, хто бачить які записи</p>
+					</div>
+				</div>
+			</div>
+			<div class="mn-privacy-visual">
+				&gt; connection: encrypted (TLS 1.3)<br />
+				&gt; bot_visible: <span class="mn-line-ok">false</span><br />
+				&gt; model_training_on_data: <span class="mn-line-ok">false</span><br />
+				&gt; retention_policy: team-defined<br />
+				&gt; access_control: role-based<span
+					class="mn-cursor"
+					style="
+						display: inline-block;
+						width: 7px;
+						height: 12px;
+						background: var(--orange);
+						margin-left: 4px;
+					"></span>
+			</div>
+		</div>
+	</section>
+
+	<!-- TESTIMONIALS -->
+	<section class="mn-section mn-section-tight">
+		<div class="mn-reveal">
+			<div class="mn-eyebrow">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Відгуки</span>
+			</div>
+			<h2 style="font-size: clamp(26px, 3.2vw, 34px)">
+				Команди, які вже позбулись ручного конспекту
+			</h2>
+		</div>
+		<div class="mn-testi-grid">
+			<div class="mn-glass mn-testi-card mn-reveal">
+				<p>
+					«Ми перестали сперечатись, хто що обіцяв. Тепер це просто в задачах з
+					таймкодом».
+				</p>
+				<div class="mn-testi-person">
+					<img
+						class="mn-testi-avatar"
+						src="https://res.cloudinary.com/fc0ikiqk/image/upload/v1786348084/avatar-woman-2.jpg"
+						alt="Марина К."
+						style="object-position: 75% 20%" />
+					<div>
+						<div class="mn-testi-name">Марина К.</div>
+						<div class="mn-testi-role">Head of Product</div>
+					</div>
+				</div>
+			</div>
+			<div class="mn-glass mn-testi-card mn-reveal">
+				<p>
+					«Minutes AI зекономив нам години — більше не треба передивлятись
+					записи в пошуках однієї фрази».
+				</p>
+				<div class="mn-testi-person">
+					<img
+						class="mn-testi-avatar"
+						src="https://res.cloudinary.com/fc0ikiqk/image/upload/v1786348084/avatar-man.jpg"
+						alt="Артем С." />
+					<div>
+						<div class="mn-testi-name">Артем С.</div>
+						<div class="mn-testi-role">Team Lead</div>
+					</div>
+				</div>
+			</div>
+			<div class="mn-glass mn-testi-card mn-reveal">
+				<p>
+					«Підключили за 5 хвилин, і вже з першого дзвінка отримали чіткий
+					список задач».
+				</p>
+				<div class="mn-testi-person">
+					<img
+						class="mn-testi-avatar"
+						src="https://res.cloudinary.com/fc0ikiqk/image/upload/v1786348084/avatar-woman-1.jpg"
+						alt="Юлія П." />
+					<div>
+						<div class="mn-testi-name">Юлія П.</div>
+						<div class="mn-testi-role">Founder</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- PRICING -->
+	<section class="mn-section" id="pricing">
+		<div class="mn-reveal" style="text-align: center">
+			<div class="mn-eyebrow" style="justify-content: center">
+				<span class="mn-eyebrow-line"></span><span class="mn-mono">Тарифи</span>
+			</div>
+			<h2 style="font-size: clamp(28px, 3.6vw, 40px)">
+				Почни безкоштовно, рости коли готова команда
+			</h2>
+		</div>
+		<div class="mn-pricing-grid">
+			<div class="mn-glass mn-price-card mn-reveal">
+				<h4>Free</h4>
+				<div class="mn-price-sub">Для перших спроб</div>
+				<div class="mn-price-amount">$0<span> / назавжди</span></div>
+				<ul class="mn-price-list">
+					<li>До 5 зустрічей на місяць</li>
+					<li>Базове AI summary</li>
+					<li>1 користувач</li>
+				</ul>
+				<a
+					href="#cta"
+					class="mn-btn mn-btn-ghost"
+					style="width: 100%; justify-content: center"
+					>Почати безкоштовно</a
+				>
+			</div>
+			<div class="mn-glass mn-price-card mn-highlight mn-reveal">
+				<span class="mn-price-badge">Найпопулярніший</span>
+				<h4>Team</h4>
+				<div class="mn-price-sub">Для команд, що живуть у зустрічах</div>
+				<div class="mn-price-amount">$12<span> / користувач / міс</span></div>
+				<ul class="mn-price-list">
+					<li>Безлімітні зустрічі</li>
+					<li>Ask AI — пошук по історії зустрічей</li>
+					<li>Action items + інтеграції Slack, Notion</li>
+					<li>До 20 користувачів</li>
+				</ul>
+				<a
+					href="#cta"
+					class="mn-btn mn-btn-primary"
+					style="width: 100%; justify-content: center"
+					>Обрати Team</a
+				>
+			</div>
+		</div>
+		<p class="mn-price-note">
+			Потрібен Business з SSO та API?
+			<a href="#cta" style="color: var(--orange-soft)">Зв'яжись з нами</a>
+		</p>
+	</section>
+
+	<!-- FAQ -->
+	<section class="mn-section mn-section-tight" id="faq">
+		<div class="mn-reveal" style="text-align: center">
+			<div class="mn-eyebrow" style="justify-content: center">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Питання</span>
+			</div>
+			<h2 style="font-size: clamp(26px, 3.2vw, 34px)">Часті запитання</h2>
+		</div>
+		<div class="mn-faq mn-reveal" id="mnFaq">
+			<div class="mn-faq-item mn-open">
+				<div class="mn-faq-q">
+					<span>Чи є безкоштовний період на платних планах?</span
+					><span class="mn-faq-plus">+</span>
+				</div>
+				<div class="mn-faq-a">
+					<div class="mn-faq-a-inner">
+						<p>Так, 14 днів повного доступу до Team без картки.</p>
+					</div>
+				</div>
+			</div>
+			<div class="mn-faq-item">
+				<div class="mn-faq-q">
+					<span>Чи можна скасувати підписку в будь-який момент?</span
+					><span class="mn-faq-plus">+</span>
+				</div>
+				<div class="mn-faq-a">
+					<div class="mn-faq-a-inner">
+						<p>
+							Так, без штрафів — доступ залишається до кінця оплаченого періоду.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="mn-faq-item">
+				<div class="mn-faq-q">
+					<span>Якими мовами працює транскрипція?</span
+					><span class="mn-faq-plus">+</span>
+				</div>
+				<div class="mn-faq-a">
+					<div class="mn-faq-a-inner">
+						<p>
+							Українська, англійська та ще 20+ мов з автоматичним визначенням.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ABOUT -->
+	<section class="mn-section mn-section-tight" id="about">
+		<div class="mn-glass mn-privacy mn-about mn-reveal">
+			<div class="mn-about-text">
+				<div class="mn-eyebrow">
+					<span class="mn-eyebrow-line"></span
+					><span class="mn-mono">Про нас</span>
+				</div>
+				<h3 style="font-size: 28px">
+					Робимо зустрічі коротшими, а домовленості — чіткими
+				</h3>
+				<p
+					style="
+						color: var(--ink-dim);
+						font-size: 15px;
+						margin-top: 16px;
+						max-width: 460px;
+					">
+					Ми створили Minutes AI, щоб команди могли зосередитися на розмові, а
+					не на нотатках. Наш асистент автоматично фіксує домовленості, формує
+					підсумки та допомагає нічого не втрачати після зустрічей.
+				</p>
+				<div class="mn-privacy-points">
+					<div class="mn-privacy-point">
+						<span class="mn-check">→</span>
+						<p>
+							Заснована у 2024 році командою з досвідом у продуктовій розробці
+							та ML
+						</p>
+					</div>
+					<div class="mn-privacy-point">
+						<span class="mn-check">→</span>
+						<p>
+							Понад 900 команд по всьому світу вже автоматизували протоколювання
+							зустрічей
+						</p>
+					</div>
+					<div class="mn-privacy-point">
+						<span class="mn-check">→</span>
+						<p>Продукт розвивається щотижня на основі фідбеку користувачів</p>
+					</div>
+				</div>
+			</div>
+			<div class="mn-about-img">
+				<img
+					src="https://res.cloudinary.com/fc0ikiqk/image/upload/v1786348085/team_1.jpg"
+					alt="Команда Minutes AI за роботою" />
+				<div
+					style="
+						position: absolute;
+						inset: 0;
+						background: linear-gradient(
+							90deg,
+							rgba(11, 10, 8, 0.35),
+							transparent 40%
+						);
+					"></div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CONTACTS -->
+	<section class="mn-section" id="contacts">
+		<div class="mn-reveal" style="text-align: center; margin-bottom: 8px">
+			<div class="mn-eyebrow" style="justify-content: center">
+				<span class="mn-eyebrow-line"></span
+				><span class="mn-mono">Почни зараз</span>
+			</div>
+			<h2 style="font-size: clamp(28px, 3.6vw, 40px)">
+				Залиш заявку — покажемо демо за 15 хвилин
+			</h2>
+			<p style="color: var(--ink-dim); margin-top: 14px">
+				Безкоштовно для перших 5 зустрічей. Картка не потрібна.
+			</p>
+		</div>
+		<div
+			class="mn-glass mn-reveal"
+			id="cta"
+			style="
+				max-width: 560px;
+				margin: 36px auto 0;
+				padding: 36px;
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+			">
+			<input
+				type="text"
+				placeholder="Ім'я"
+				style="
+					background: rgba(0, 0, 0, 0.25);
+					border: 1px solid var(--line);
+					border-radius: 10px;
+					padding: 14px 16px;
+					color: var(--ink);
+					font-family: &quot;Inter&quot;, sans-serif;
+					font-size: 14px;
+				" />
+			<input
+				type="email"
+				placeholder="Робочий email"
+				style="
+					background: rgba(0, 0, 0, 0.25);
+					border: 1px solid var(--line);
+					border-radius: 10px;
+					padding: 14px 16px;
+					color: var(--ink);
+					font-family: &quot;Inter&quot;, sans-serif;
+					font-size: 14px;
+				" />
+			<input
+				type="text"
+				placeholder="Назва компанії"
+				style="
+					background: rgba(0, 0, 0, 0.25);
+					border: 1px solid var(--line);
+					border-radius: 10px;
+					padding: 14px 16px;
+					color: var(--ink);
+					font-family: &quot;Inter&quot;, sans-serif;
+					font-size: 14px;
+				" />
+			<a
+				href="#"
+				class="mn-btn mn-btn-primary"
+				style="justify-content: center; margin-top: 8px"
+				>Надіслати заявку →</a
+			>
+			<p
+				style="
+					text-align: center;
+					color: var(--ink-faint);
+					font-size: 12px;
+					margin: 0;
+				">
+				Або напиши напряму:
+				<a
+					href="mailto:hello@minutes.ai"
+					style="color: var(--orange-soft); text-decoration: none"
+					>hello@minutes.ai</a
+				>
+			</p>
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer class="mn-footer">
+		<div>
+			<div class="mn-logo">
+				<span class="mn-logo-dot"></span>Minutes<span
+					style="color: var(--orange-soft)"
+					>.ai</span
+				>
+			</div>
+			<p class="mn-footer-bottom" style="margin-top: 12px; max-width: 220px">
+				AI-асистент для зустрічей, який пам'ятає все замість вас.
+			</p>
+			<div
+				style="
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+					margin-top: 20px;
+				">
+				<a
+					href="mailto:hello@minutes.ai"
+					style="color: var(--ink-dim); text-decoration: none; font-size: 14px"
+					>hello@minutes.ai</a
+				>
+				<a
+					href="tel:+380671234567"
+					style="color: var(--ink-dim); text-decoration: none; font-size: 14px"
+					>+380 67 123 45 67</a
+				>
+				<span style="color: var(--ink-faint); font-size: 14px"
+					>Київ, Україна</span
+				>
+			</div>
+			<div style="display: flex; gap: 12px; margin-top: 20px">
+				<a
+					href="https://linkedin.com/company/minutesai"
+					target="_blank"
+					rel="noopener"
+					class="mn-glass mn-social"
+					aria-label="LinkedIn">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z" />
+					</svg>
+				</a>
+				<a
+					href="https://x.com/minutesai"
+					target="_blank"
+					rel="noopener"
+					class="mn-glass mn-social"
+					aria-label="X (Twitter)">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M18.24 3h2.9l-6.34 7.25L22.2 21h-5.84l-4.57-5.98L6.5 21H3.6l6.78-7.75L2.2 3h5.99l4.13 5.47L18.24 3zm-1.02 16.2h1.6L7.86 4.7H6.14l11.08 14.5z" />
+					</svg>
+				</a>
+				<a
+					href="https://instagram.com/minutesai"
+					target="_blank"
+					rel="noopener"
+					class="mn-glass mn-social"
+					aria-label="Instagram">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 0 1 1.77 1.15 4.9 4.9 0 0 1 1.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.16-.46-.35-1.26-.4-2.43C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43a4.9 4.9 0 0 1 1.15-1.77A4.9 4.9 0 0 1 5.59 1.8c.46-.16 1.26-.35 2.43-.4C9.29 1.34 9.67 1.33 12 1.33zm0 1.98c-3.15 0-3.5.01-4.74.07-.96.04-1.48.2-1.83.34-.46.18-.78.39-1.13.74-.35.35-.56.67-.74 1.13-.14.35-.3.87-.34 1.83-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.04.96.2 1.48.34 1.83.18.46.39.78.74 1.13.35.35.67.56 1.13.74.35.14.87.3 1.83.34 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.96-.04 1.48-.2 1.83-.34.46-.18.78-.39 1.13-.74.35-.35.56-.67.74-1.13.14-.35.3-.87.34-1.83.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.96-.2-1.48-.34-1.83a3 3 0 0 0-.74-1.13 3 3 0 0 0-1.13-.74c-.35-.14-.87-.3-1.83-.34-1.24-.06-1.59-.07-4.74-.07zm0 3.36a5.46 5.46 0 1 1 0 10.92 5.46 5.46 0 0 1 0-10.92zm0 9c1.96 0 3.55-1.59 3.55-3.55S13.96 8.45 12 8.45 8.45 10.04 8.45 12 10.04 15.55 12 15.55zm5.68-9.24a1.28 1.28 0 1 1 0-2.55 1.28 1.28 0 0 1 0 2.55z" />
+					</svg>
+				</a>
+			</div>
+		</div>
+		<div class="mn-footer-links">
+			<div class="mn-footer-col">
+				<span class="mn-mono">Продукт</span>
+				<a href="#features">Функції</a>
+				<a href="#pricing">Тарифи</a>
+				<a href="#faq">FAQ</a>
+			</div>
+			<div class="mn-footer-col">
+				<span class="mn-mono">Компанія</span>
+				<a href="#about">Про нас</a>
+				<a href="#contacts">Контакти</a>
+			</div>
+			<div class="mn-footer-col">
+				<span class="mn-mono">Правове</span>
+				<a
+					href="#"
+					onclick="
+						mnOpenModal('mnModalPrivacy');
+						return false;
+					"
+					>Приватність</a
+				>
+				<a
+					href="#"
+					onclick="
+						mnOpenModal('mnModalTerms');
+						return false;
+					"
+					>Умови</a
+				>
+			</div>
+		</div>
+	</footer>
+
+	<!-- MODALS -->
+	<div
+		class="mn-modal-overlay"
+		id="mnModalPrivacy"
+		onclick="if (event.target === this) mnCloseModal('mnModalPrivacy');">
+		<div class="mn-modal">
+			<div class="mn-modal-head">
+				<h3>Політика приватності</h3>
+				<div class="mn-modal-close" onclick="mnCloseModal('mnModalPrivacy')">
+					×
+				</div>
+			</div>
+			<div class="mn-modal-body">
+				<span class="mn-modal-updated">Оновлено · серпень 2026</span>
+				<p>
+					Minutes AI обробляє аудіо, відео та текст ваших зустрічей виключно для
+					надання сервісу транскрипції, summary та action items. Ми не продаємо
+					й не передаємо ваші дані третім сторонам для маркетингових цілей.
+				</p>
+				<h4>Які дані ми збираємо</h4>
+				<ul>
+					<li>Аудіо- та відеопотік зустрічі (за наявності доступу)</li>
+					<li>Текст транскрипції та згенеровані AI summary</li>
+					<li>Базові облікові дані: ім'я, email, назва компанії</li>
+				</ul>
+				<h4>Як ми їх використовуємо</h4>
+				<p>
+					Дані використовуються лише для генерації транскрипції, summary, action
+					items і роботи функції Ask AI в межах вашого акаунта. Записи не
+					використовуються для тренування AI-моделей без окремої явної згоди.
+				</p>
+				<h4>Шифрування та зберігання</h4>
+				<p>
+					Усі дані шифруються під час передачі (TLS 1.3) та зберігання. Термін
+					зберігання визначається налаштуваннями команди — за замовчуванням
+					записи доступні протягом усього періоду активної підписки.
+				</p>
+				<h4>Доступ і контроль</h4>
+				<p>
+					Ви можете в будь-який момент експортувати або видалити дані своєї
+					команди в налаштуваннях акаунта. Права доступу до записів
+					налаштовуються на рівні ролей команди.
+				</p>
+				<p style="color: var(--ink-faint); font-size: 12px; margin-top: 20px">
+					Це демонстраційний текст, підготовлений для кейс-проєкту портфоліо, а
+					не юридичний документ.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="mn-modal-overlay"
+		id="mnModalTerms"
+		onclick="if (event.target === this) mnCloseModal('mnModalTerms');">
+		<div class="mn-modal">
+			<div class="mn-modal-head">
+				<h3>Умови використання</h3>
+				<div class="mn-modal-close" onclick="mnCloseModal('mnModalTerms')">
+					×
+				</div>
+			</div>
+			<div class="mn-modal-body">
+				<span class="mn-modal-updated">Оновлено · серпень 2026</span>
+				<p>
+					Використовуючи Minutes AI, ви погоджуєтесь на цих умов. Якщо ви
+					реєструєте акаунт від імені компанії, ви підтверджуєте, що маєте
+					повноваження приймати ці умови від її імені.
+				</p>
+				<h4>Обліковий запис і оплата</h4>
+				<ul>
+					<li>
+						Тариф Free доступний безкоштовно з обмеженням у 5 зустрічей на
+						місяць
+					</li>
+					<li>
+						Тарифи Team і Business оплачуються щомісячно або щорічно наперед
+					</li>
+					<li>
+						Підписку можна скасувати в будь-який момент — доступ зберігається до
+						кінця оплаченого періоду
+					</li>
+				</ul>
+				<h4>Допустиме використання</h4>
+				<p>
+					Ви несете відповідальність за отримання згоди учасників на запис
+					зустрічей там, де це вимагається законодавством. Заборонено
+					використовувати Minutes AI для запису розмов без належних правових
+					підстав.
+				</p>
+				<h4>Інтелектуальна власність</h4>
+				<p>
+					Контент, який ви завантажуєте чи генеруєте через Minutes AI,
+					залишається вашою власністю. Ми отримуємо лише обмежену ліцензію на
+					обробку цих даних для надання сервісу.
+				</p>
+				<h4>Обмеження відповідальності</h4>
+				<p>
+					Minutes AI надається "як є". Ми докладаємо розумних зусиль для
+					точності AI-згенерованого summary, але не гарантуємо повної
+					відсутності помилок — важливі рішення варто перевіряти за оригінальним
+					записом.
+				</p>
+				<p style="color: var(--ink-faint); font-size: 12px; margin-top: 20px">
+					Це демонстраційний текст, підготовлений для кейс-проєкту портфоліо, а
+					не юридичний документ.
+				</p>
+			</div>
+		</div>
+	</div>
+	<div
+		style="
+			text-align: center;
+			padding-bottom: 32px;
+			color: var(--ink-faint);
+			font-size: 12px;
+		">
+		© 2026 Minutes AI · Кейс-проєкт портфоліо
+	</div>
+</div>
+
+<script>
+	// Modal open/close — needs to be global since onclick attributes call it directly
+	function mnOpenModal(id) {
+		const el = document.getElementById(id);
+		if (el) {
+			el.classList.add("mn-modal-open");
+			document.body.style.overflow = "hidden";
+		}
+	}
+	function mnCloseModal(id) {
+		const el = document.getElementById(id);
+		if (el) {
+			el.classList.remove("mn-modal-open");
+			document.body.style.overflow = "";
+		}
+	}
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") {
+			document
+				.querySelectorAll(".mn-modal-overlay.mn-modal-open")
+				.forEach((el) => {
+					el.classList.remove("mn-modal-open");
+					document.body.style.overflow = "";
+				});
+		}
+	});
+</script>
+
+<script>
+	(function () {
+		const root = document.currentScript.previousElementSibling;
+
+		// FAQ accordion
+		document.querySelectorAll(".mn-faq-item").forEach((item) => {
+			item.querySelector(".mn-faq-q").addEventListener("click", () => {
+				const wasOpen = item.classList.contains("mn-open");
+				document
+					.querySelectorAll(".mn-faq-item")
+					.forEach((i) => i.classList.remove("mn-open"));
+				if (!wasOpen) item.classList.add("mn-open");
+			});
+		});
+
+		// Scroll reveal
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.isIntersecting) {
+						e.target.classList.add("mn-in");
+						observer.unobserve(e.target);
+					}
+				});
+			},
+			{ threshold: 0.15 },
+		);
+		document
+			.querySelectorAll(".mn-reveal")
+			.forEach((el) => observer.observe(el));
+
+		// Hero transcript typing -> tasks reveal
+		const lines = [
+			"Олена: тоді зробимо оновлення лендінгу до п'ятниці",
+			"Макс: добре, я надішлю бриф клієнту сьогодні",
+			"Ілона: бюджет на Q3 погодимо на наступному дзвінку",
+		];
+		const el = document.getElementById("mnTranscript");
+		const tasks = document.querySelectorAll("#mnTaskStack .mn-task");
+		let li = 0,
+			ci = 0;
+
+		function typeLine() {
+			if (li >= lines.length) {
+				setTimeout(() => {
+					el.innerHTML = "";
+					tasks.forEach((t) => t.classList.remove("mn-show"));
+					li = 0;
+					ci = 0;
+					typeLine();
+				}, 2600);
+				return;
+			}
+			if (ci === 0) el.innerHTML += li > 0 ? "<br/>" : "";
+			const line = lines[li];
+			el.innerHTML = el.innerHTML.slice(
+				0,
+				el.innerHTML.lastIndexOf(">") + 1 === el.innerHTML.length
+					? el.innerHTML.length
+					: el.innerHTML.length,
+			);
+			if (ci < line.length) {
+				el.innerHTML =
+					getBase() + line.slice(0, ci + 1) + '<span class="mn-cursor"></span>';
+				ci++;
+				setTimeout(typeLine, 28);
+			} else {
+				el.innerHTML = getBase() + line;
+				if (tasks[li])
+					setTimeout(() => tasks[li].classList.add("mn-show"), 200);
+				li++;
+				ci = 0;
+				setTimeout(typeLine, 500);
+			}
+		}
+		function getBase() {
+			let base = "";
+			for (let i = 0; i < li; i++) {
+				base += (i > 0 ? "<br/>" : "") + lines[i];
+			}
+			if (li > 0) base += "<br/>";
+			return base;
+		}
+		typeLine();
+
+		// Smooth scroll for all anchor links (nav + footer + in-page CTAs)
+		const navHeight = document.querySelector(".mn-nav")?.offsetHeight || 0;
+		function mnEaseInOutCubic(t) {
+			return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+		}
+		function mnSmoothScrollTo(targetY, duration) {
+			const startY = window.scrollY;
+			const diff = targetY - startY;
+			let startTime = null;
+			function step(ts) {
+				if (startTime === null) startTime = ts;
+				const progress = Math.min((ts - startTime) / duration, 1);
+				window.scrollTo(0, startY + diff * mnEaseInOutCubic(progress));
+				if (progress < 1) requestAnimationFrame(step);
+			}
+			requestAnimationFrame(step);
+		}
+		document.querySelectorAll('a[href^="#"]').forEach((link) => {
+			const href = link.getAttribute("href");
+			if (href.length < 2) return; // skip bare "#"
+			const target = document.querySelector(href);
+			if (!target) return;
+			link.addEventListener("click", (e) => {
+				e.preventDefault();
+				const targetY =
+					target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+				mnSmoothScrollTo(Math.max(targetY, 0), 800);
+			});
+		});
+
+		// Signature moment: warm glow drifts toward the cursor across the whole site
+		const cursorGlow = document.getElementById("mnCursorGlow");
+		if (
+			cursorGlow &&
+			window.matchMedia("(hover: hover) and (pointer: fine)").matches
+		) {
+			let ticking = false;
+			document.addEventListener("mousemove", (e) => {
+				cursorGlow.classList.add("mn-active");
+				if (ticking) return;
+				ticking = true;
+				requestAnimationFrame(() => {
+					cursorGlow.style.setProperty("--mn-cx", e.clientX + "px");
+					cursorGlow.style.setProperty("--mn-cy", e.clientY + "px");
+					ticking = false;
+				});
+			});
+			document.addEventListener("mouseleave", () => {
+				cursorGlow.classList.remove("mn-active");
+			});
+		}
+	})();
+</script>
